@@ -20,13 +20,6 @@
       <version>4.3.9.RELEASE</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.google.auto.service/auto-service -->
-    <dependency>
-      <groupId>com.google.auto.service</groupId>
-      <artifactId>auto-service</artifactId>
-      <version>1.0-rc3</version>
-    </dependency>
-
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
@@ -38,6 +31,13 @@
       <artifactId>google-cloud-pubsub</artifactId>
       <version>0.17.1-alpha</version>
     </dependency>
+
+    <!-- test only -->
+    <!--<dependency>-->
+      <!--<groupId>org.springframework.boot</groupId>-->
+      <!--<artifactId>spring-boot-starter-test</artifactId>-->
+      <!--<version></version>-->
+    <!--</dependency>-->
 
   </dependencies>
 
