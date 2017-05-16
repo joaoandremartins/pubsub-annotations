@@ -1,4 +1,4 @@
-package org.springframework.integration.googlepubsub.channel.outbound;
+package org.springframework.cloud.gcp.pubsub.outbound;
 
 import com.google.cloud.pubsub.spi.v1.Publisher;
 import com.google.pubsub.v1.TopicName;
