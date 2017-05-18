@@ -1,21 +1,25 @@
 package org.springframework.cloud.gcp.pubsub.outbound;
 
+import com.google.api.client.util.Value;
 import com.google.cloud.pubsub.spi.v1.Publisher;
 import com.google.pubsub.v1.PubsubMessage;
-import org.springframework.context.annotation.Bean;
+import com.google.pubsub.v1.TopicName;
+import java.io.IOException;
 import org.springframework.integration.handler.AbstractMessageHandler;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
 
 /**
  * Created by joaomartins on 5/8/17.
  */
 public class PubSubOutboundChannelAdapter extends AbstractMessageHandler {
 
+  @Value("${cloud.gcp.project.id}")
+  private String projectId;
+
   private Publisher publisher;
 
-  public PubSubOutboundChannelAdapter(Publisher publisher) {
-    this.publisher = publisher;
+  public PubSubOutboundChannelAdapter(String topicName) throws IOException {
+    publisher = Publisher.defaultBuilder(TopicName.create(projectId, topicName)).build();
   }
 
   @Override

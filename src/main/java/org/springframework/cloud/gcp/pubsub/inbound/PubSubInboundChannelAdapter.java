@@ -4,9 +4,11 @@ import com.google.cloud.pubsub.spi.v1.AckReplyConsumer;
 import com.google.cloud.pubsub.spi.v1.Subscriber;
 import com.google.pubsub.v1.PubsubMessage;
 import com.google.pubsub.v1.SubscriptionName;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.integration.endpoint.MessageProducerSupport;
-import org.springframework.messaging.support.GenericMessage;
+import org.springframework.messaging.MessageHeaders;
 
 /**
  * Created by joaomartins on 5/10/17.
@@ -28,7 +30,12 @@ public class PubSubInboundChannelAdapter extends MessageProducerSupport {
   }
 
   private void receiveMessage(PubsubMessage message, AckReplyConsumer consumer) {
-    sendMessage(new GenericMessage<>(message.getData()));
+    Map<String, Object> messageHeaders = new HashMap<>();
+    message.getAttributesMap().forEach(messageHeaders::put);
+
+    sendMessage(
+        getMessagingTemplate().getMessageConverter().toMessage(message.getData(),
+            new MessageHeaders(messageHeaders)));
     consumer.ack();
   }
 
